@@ -1,7 +1,7 @@
 const EventPage = () => {
   return (
     <>
-      <h1>Event Page</h1>
+      <h1 className="text-[22px]">Event Page</h1>
     </>
   );
 };

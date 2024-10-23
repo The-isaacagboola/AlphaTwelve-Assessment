@@ -21,13 +21,19 @@ const routes = [
 function App() {
   return (
     <BrowserRouter>
-      <div className="md:flex">
+      <div className="md:flex max-w-[1440px]">
         <Nav />
-        <Routes>
-          {routes.map((routeItem, i) => (
-            <Route key={i} path={routeItem.path} element={routeItem.element} />
-          ))}
-        </Routes>
+        <section className="md:ml-[28px] md:mt-[40px]">
+          <Routes>
+            {routes.map((routeItem, i) => (
+              <Route
+                key={i}
+                path={routeItem.path}
+                element={routeItem.element}
+              />
+            ))}
+          </Routes>
+        </section>
       </div>
     </BrowserRouter>
   );

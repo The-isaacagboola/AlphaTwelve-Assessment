@@ -1,7 +1,7 @@
 const MessagesPage = () => {
   return (
     <>
-      <h1>Messages Page</h1>
+      <h1 className="text-[22px]">Messages Page</h1>
     </>
   );
 };
