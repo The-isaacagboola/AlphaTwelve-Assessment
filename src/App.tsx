@@ -1,7 +1,36 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import HomePage from "./pages/home";
+import EventPage from "./pages/events";
+import SpeakersPage from "./pages/speakers";
+import ReportsPage from "./pages/reports";
+import NotificationsPage from "./pages/notifications";
+import MessagesPage from "./pages/Messages";
+import { Nav } from "./components/nav";
+import SettingsPage from "./pages/settings";
 
+const routes = [
+  { path: "/", element: <HomePage /> },
+  { path: "/Events", element: <EventPage /> },
+  { path: "/Speakers", element: <SpeakersPage /> },
+  { path: "/Reports", element: <ReportsPage /> },
+  { path: "/Notifications", element: <NotificationsPage /> },
+  { path: "/Messages", element: <MessagesPage /> },
+  { path: "/Settings", element: <SettingsPage /> },
+];
 function App() {
-  return <h1>AlphaTwelve</h1>;
+  return (
+    <BrowserRouter>
+      <div className="md:flex">
+        <Nav />
+        <Routes>
+          {routes.map((routeItem, i) => (
+            <Route key={i} path={routeItem.path} element={routeItem.element} />
+          ))}
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;
