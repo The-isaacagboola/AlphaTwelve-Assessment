@@ -49,13 +49,22 @@ const routes = [
 ];
 export const Nav = () => {
   const [presentRoute, setPresentRoute] = useState("/");
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <nav className="p-2 lg:max-w-[240px] lg:border-r lg:border-r-[#F1F5F9]">
+    <nav
+      className={`p-2 lg:${
+        collapsed ? "w-[64px]" : "w-[240px]"
+      } lg:border-r lg:border-r-[#F1F5F9] transition-all duration-500`}
+    >
       <div>
-        <div className="p-2 max-w-max mb-4">
-          <h1 className="text-[#2563EB] border border-[#2563EB] bg-[#93C5FD] border-dashed px-[6px] py-2 text-xs font-semibold cursor-pointer">
-            Full Logo
+        <div className={` p-2 max-w-max mb-4`}>
+          <h1
+            className={`${
+              collapsed ? "w-8 h-8" : ""
+            } text-[#2563EB] border border-[#2563EB] bg-[#93C5FD] border-dashed px-[6px] py-2 text-xs font-semibold cursor-pointer`}
+          >
+            {!collapsed && "Full Logo"}
           </h1>
         </div>
 
@@ -80,15 +89,19 @@ export const Nav = () => {
                   height={20}
                 />
                 <p
-                  className={
-                    route.path === presentRoute ? "text-[#8576FF]" : ""
-                  }
+                  className={` ${collapsed && "hidden"}
+                    ${route.path === presentRoute && "text-[#8576FF]"} 
+                  `}
                 >
                   {route.name}
                 </p>
 
                 {route.path === "/notifications" ? (
-                  <div className="flex items-center justify-center ml-auto rounded-full w-6 h-6 px-2 py-1 text-white bg-[#F43F5E] self-end">
+                  <div
+                    className={`${
+                      collapsed && "hidden"
+                    } flex items-center justify-center ml-auto rounded-full w-6 h-6 px-2 py-1 text-white bg-[#F43F5E] self-end`}
+                  >
                     3
                   </div>
                 ) : null}
@@ -96,10 +109,15 @@ export const Nav = () => {
             </Link>
           ))}
 
-          <div className="flex gap-4 p-2 hover:text-[#8576FF] hover:bg-[#FCF7FF] cursor-pointer">
-            <DoubleLeftArrow />
-            <p>Collapse</p>
-          </div>
+          <button
+            className="hidden lg:flex gap-4 p-2 hover:text-[#8576FF] hover:bg-[#FCF7FF] cursor-pointer"
+            onClick={() => setCollapsed((prev) => !prev)}
+          >
+            <div className={`${collapsed && "rotate-180"} transition-all`}>
+              <DoubleLeftArrow />
+            </div>
+            <p className={`${collapsed && "hidden"}`}>Collapse</p>
+          </button>
 
           {/* Dark Mode Toggle */}
           <div className="flex items-center gap-2 px-2 cursor-pointer text-xs">
@@ -115,13 +133,13 @@ export const Nav = () => {
                 name="darkmode"
               />
             </div>
-            <p>Dark mode</p>
+            <p className={`${collapsed && "hidden"}`}>Dark mode</p>
           </div>
 
           {/* Account info */}
           <div className="flex items-center gap-2 px-2 cursor-pointer text-xs">
             <img src={avatar} alt="profile image" className="w-8 h-8" />
-            <div>
+            <div className={`${collapsed && "hidden"}`}>
               <p>Rudra Devi</p>
               <p className="text-[#64748B]">rudra.devi@gmail.com</p>
             </div>

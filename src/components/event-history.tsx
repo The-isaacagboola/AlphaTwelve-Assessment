@@ -120,23 +120,31 @@ const EventHistory = () => {
       <div className="flex w-full justify-between">
         <div className="flex items-center gap-4">
           <button
-            className="p-2 rounded-sm border border-[#E2E8F0]"
+            className="p-2 rounded-sm border border-[#E2E8F0] disabled:bg-slate-200"
             onClick={() =>
               setPaginationIndex((index) => (index !== 0 ? index - 1 : index))
             }
+            disabled={paginationIndex == 0}
           >
             <ChevronLeftIcon />
           </button>
 
           {[...Array(3)].map((_, i) => (
-            <button key={i} className={`p-[2px]`}>
-              {paginationIndex + i}
+            <button
+              key={i}
+              className={`p-[2px] w-6 h-6 rounded-full flex items-center justify-center ${
+                i == 0 ? "bg-[#8576FF] text-white" : ""
+              }`}
+              onClick={() => setPaginationIndex(paginationIndex + i)}
+            >
+              {paginationIndex + 1 + i}
             </button>
           ))}
 
           <button
             className="p-2 rounded-sm border border-[#E2E8F0]"
             onClick={() => setPaginationIndex((index) => index + 1)}
+            disabled={paginationIndex > 10}
           >
             <ChevronRightIcon />
           </button>
@@ -146,7 +154,7 @@ const EventHistory = () => {
           <p>Show:</p>
 
           <div className="py-2 px-4 flex gap-2 items-center border border-[#E2E8F0] rounded-sm cursor-pointer">
-            <p>10 Rows</p>
+            <p>{Math.ceil(EventHistoryData.length / 10)} Rows</p>
             <ChevronDown />
           </div>
         </div>
