@@ -40,7 +40,7 @@ export default function Carousel() {
     return data[active];
   }, [active]);
   return (
-    <div className="relative max-w-[510px]">
+    <div className="relative max-w-[510px] rounded-[5px] overflow-clip">
       {data.map((item, i) => (
         <div
           key={i}
@@ -52,14 +52,14 @@ export default function Carousel() {
 
       <div className="flex perfect-center p-4 justify-between items-center w-full absolute">
         <button
-          className="w-6 h-6 bg-white flex items-center justify-center rounded-full"
+          className="w-6 h-6 bg-white flex items-center justify-center rounded-full border border-[#E2E8F0]"
           onClick={() => handleNext(active)}
         >
           <ChevronLeftIcon />
         </button>
 
         <button
-          className="w-6 h-6 bg-white flex items-center justify-center rounded-full"
+          className="w-6 h-6 bg-white flex items-center justify-center rounded-full border border-[#E2E8F0]"
           onClick={() => handlePrevious(active)}
         >
           <ChevronRightIcon />
@@ -77,9 +77,7 @@ export default function Carousel() {
               className={`w-3 h-[3px] rounded-[100px] ${
                 i === active ? "bg-white" : "bg-white/30"
               }`}
-            >
-              {" "}
-            </span>
+            />
           ))}
         </div>
       </div>

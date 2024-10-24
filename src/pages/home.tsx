@@ -1,6 +1,7 @@
 import { Chart } from "react-google-charts";
 import SummaryCard from "../components/summary-card";
 import Carousel from "../components/Carousel";
+import EventHistory from "../components/event-history";
 
 const eventSummary = [
   {
@@ -62,20 +63,27 @@ const HomePage = () => {
         ))}
       </div>
       {/* Graph and Carousel */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-[21px] md:mt-[34px] ">
-        <div className="flex items-center border border-[#F2F2F7] rounded-md justify-center lg:p-[20px] max-w-[554px]">
-          <Chart
-            chartType="ColumnChart"
-            data={ChartData}
-            options={options}
-            width="570px"
-            height="240px"
-          />
+      <div className="mt-[21px] md:mt-[34px]">
+        <h2 className="font-medium text-lg mb-3">
+          Event Registrations per month
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ">
+          <div className="flex items-center border border-[#F2F2F7] rounded-md justify-center lg:p-[20px] max-w-[554px]">
+            <Chart
+              chartType="ColumnChart"
+              data={ChartData}
+              options={options}
+              width="570px"
+              height="240px"
+            />
+          </div>
+          <Carousel />
         </div>
-        <Carousel />
       </div>
 
       {/* Event Table */}
+      <EventHistory />
     </main>
   );
 };
