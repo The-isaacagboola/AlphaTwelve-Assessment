@@ -57,7 +57,7 @@ const HomePage = () => {
     <main>
       <h1 className="text-[22px]">Welcome! here’s your summary</h1>
       {/* Summary Cards */}
-      <div className="mt-6 flex gap-3">
+      <div className="mt-6 flex w-full justify-between">
         {eventSummary.map((item, i) => (
           <SummaryCard key={i} prop={item} />
         ))}
@@ -69,7 +69,7 @@ const HomePage = () => {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ">
-          <div className="flex items-center border border-[#F2F2F7] rounded-md justify-center lg:p-[20px] max-w-[554px]">
+          <div className="flex items-center border border-[#F2F2F7] rounded-md justify-center ">
             <Chart
               chartType="ColumnChart"
               data={ChartData}

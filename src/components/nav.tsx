@@ -51,7 +51,7 @@ export const Nav = () => {
   const [presentRoute, setPresentRoute] = useState("/");
 
   return (
-    <nav className="p-2 max-w-[240px] md:h-[1024px] border-r border-r-[#F1F5F9]">
+    <nav className="p-2 lg:max-w-[240px] lg:border-r lg:border-r-[#F1F5F9]">
       <div>
         <div className="p-2 max-w-max mb-4">
           <h1 className="text-[#2563EB] border border-[#2563EB] bg-[#93C5FD] border-dashed px-[6px] py-2 text-xs font-semibold cursor-pointer">

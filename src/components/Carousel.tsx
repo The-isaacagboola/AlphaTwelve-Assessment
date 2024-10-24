@@ -40,7 +40,7 @@ export default function Carousel() {
     return data[active];
   }, [active]);
   return (
-    <div className="relative max-w-[510px] rounded-[5px] overflow-clip">
+    <div className="relative rounded-[5px] overflow-clip">
       {data.map((item, i) => (
         <div
           key={i}

@@ -393,7 +393,7 @@ export const EventHistoryData = [
     name: "Digital Leadership Forum",
     date: "2024-11-20",
     speaker: "Karen Clark",
-    completeed: true,
+    completed: true,
   },
   {
     name: "Tech for Social Impact Forum",
