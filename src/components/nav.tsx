@@ -11,6 +11,7 @@ import avatar from "../assets/images/avatar_temika.webp";
 import { useEffect, useState } from "react";
 import Hamburger from "../assets/icons/hamburger";
 import CloseIcon from "../assets/icons/close-icon";
+import { useDarkMode } from "../context";
 
 export const routes = [
   {
@@ -49,12 +50,15 @@ export const routes = [
     icon: SettingsIcon,
   },
 ];
+
 export const Nav = () => {
   const [presentRoute, setPresentRoute] = useState("/");
   const [collapsed, setCollapsed] = useState(false);
   const [showMobileNav, setShowMobileNav] = useState(false);
 
   const closeMobileNav = () => setShowMobileNav(false);
+
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   useEffect(() => {
     if (showMobileNav) {
@@ -65,7 +69,7 @@ export const Nav = () => {
   }, [showMobileNav]);
   return (
     <nav
-      className={`p-2 lg:border-r lg:border-r-[#F1F5F9] transition-all duration-700 ease-in-out ${
+      className={`p-2 lg:border-r lg:border-r-[#F1F5F9] dark:border-r-primaryDark  transition-all duration-700 ease-in-out dark:bg-primaryDark  ${
         collapsed ? "lg:w-[64px]" : "lg:w-[240px]"
       }`}
     >
@@ -95,7 +99,7 @@ export const Nav = () => {
 
         {/* Mobile navigation */}
         <div
-          className={`text-[#334155] text-[14px] bg-white fixed top-0 left-0 w-full h-full transition-all duration-700 ease-in-out transform ${
+          className={`text-[#334155] dark:text-white text-[14px] bg-white dark:bg-primaryDark fixed top-0 left-0 w-full h-full transition-all duration-700 ease-in-out transform ${
             showMobileNav
               ? "translate-y-0 opacity-100 z-50"
               : "-translate-y-full opacity-0 z-1000"
@@ -135,7 +139,7 @@ export const Nav = () => {
 
         {/* Desktop */}
         <div
-          className={`hidden text-[#334155] text-[14px] bg-white  md:flex md:relative flex-col gap-2 transition-all duration-500`}
+          className={`hidden text-[#334155] dark:text-white text-[14px] bg-white dark:bg-primaryDark  md:flex md:relative flex-col gap-2 transition-all duration-500`}
         >
           {routes.map((route, i) => (
             <Link
@@ -145,20 +149,27 @@ export const Nav = () => {
             >
               <div
                 key={i}
-                className={`flex items-center gap-4 p-2 rounded-sm hover:text-[#8576FF] hover:bg-[#FCF7FF] ${
-                  presentRoute === route.path ? "bg-[#FCF7FF]" : ""
+                className={`flex items-center gap-4 p-2 rounded-sm hover:text-[#8576FF] hover:bg-[#FCF7FF] dark:hover:bg-lightBlue dark:hover:text-white ${
+                  presentRoute === route.path
+                    ? "bg-[#FCF7FF] dark:bg-lightBlue"
+                    : ""
                 }`}
               >
                 <route.icon
                   outlineColor={
-                    route.path === presentRoute ? "#8576FF" : "#ADA9BB"
+                    route.path === presentRoute
+                      ? `${isDarkMode ? "#FFFFFF" : "#8576FF"}`
+                      : "#ADA9BB"
                   }
                   width={20}
                   height={20}
                 />
                 <p
                   className={` ${collapsed && "hidden"}
-                    ${route.path === presentRoute && "text-[#8576FF]"} 
+                    ${
+                      route.path === presentRoute &&
+                      "text-[#8576FF] dark:text-white"
+                    } 
                   `}
                 >
                   {route.name}
@@ -178,7 +189,7 @@ export const Nav = () => {
           ))}
 
           <button
-            className="hidden lg:flex gap-4 p-2 hover:text-[#8576FF] hover:bg-[#FCF7FF] cursor-pointer"
+            className="hidden lg:flex gap-4 p-2 hover:text-[#8576FF] hover:bg-[#FCF7FF] cursor-pointer dark:hover:bg-lightBlue dark:hover:text-white"
             onClick={() => setCollapsed((prev) => !prev)}
           >
             <div className={`${collapsed && "rotate-180"} transition-all`}>
@@ -189,27 +200,32 @@ export const Nav = () => {
 
           {/* Dark Mode Toggle */}
           <div className="flex items-center gap-2 px-2 cursor-pointer text-xs">
-            <div className="flex items-center p-[2px] max-h-max justify-center bg-[#E2E8F0] rounded-[100px]">
-              <input
-                className="w-3 h-3 bg-white outline-none border-none transition-all"
-                type="radio"
-                name="darkmode"
-              />
-              <input
-                className="w-3 h-3 bg-white outline-none border-none transition-all"
-                type="radio"
-                name="darkmode"
-              />
+            <div className="flex items-center p-[2px] max-h-max justify-center bg-[#E2E8F0] dark:bg-[#8576FF] rounded-[100px]">
+              {/* Dark Mode Toggle */}
+              <div>
+                <input
+                  type="checkbox"
+                  id="switch"
+                  checked={isDarkMode}
+                  onChange={toggleDarkMode}
+                  className="dark-check"
+                />
+                <label className="label" htmlFor="switch">
+                  Toggle
+                </label>
+              </div>
             </div>
             <p className={`${collapsed && "hidden"}`}>Dark mode</p>
           </div>
 
           {/* Account info */}
-          <div className="flex items-center gap-2 px-2 cursor-pointer text-xs">
+          <div className="flex items-center gap-2 p-2 cursor-pointer text-xs">
             <img src={avatar} alt="profile image" className="w-8 h-8" />
             <div className={`${collapsed && "hidden"}`}>
               <p>Rudra Devi</p>
-              <p className="text-[#64748B]">rudra.devi@gmail.com</p>
+              <p className="text-[#64748B] dark:text-white">
+                rudra.devi@gmail.com
+              </p>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useDarkMode } from "./context";
 import "./App.css";
 import HomePage from "./pages/home";
 import EventPage from "./pages/events";
@@ -20,9 +21,15 @@ const routes = [
   { path: "/Settings", element: <SettingsPage /> },
 ];
 function App() {
+  const { isDarkMode } = useDarkMode();
+
   return (
     <BrowserRouter>
-      <div className="md:flex max-w-[1440px]">
+      <div
+        className={`md:flex  w-full dark:bg-deepestBg ${
+          isDarkMode ? "dark" : ""
+        }`}
+      >
         <Nav />
         <section className="md:ml-[28px] md:mt-[40px]">
           <Routes>

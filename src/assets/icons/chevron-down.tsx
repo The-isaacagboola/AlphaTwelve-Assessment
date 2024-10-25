@@ -12,7 +12,7 @@ const ChevronDown: FC<Iconprops> = (props) => {
     >
       <path
         d="M10.1667 7.16666L8 9.5L5.83334 7.16666"
-        stroke="#334155"
+        stroke={props.outlineColor || "#334155"}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"

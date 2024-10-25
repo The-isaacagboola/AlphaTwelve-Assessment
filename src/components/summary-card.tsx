@@ -13,13 +13,13 @@ type SummardCardProps = {
 
 export default function SummaryCard(props: SummardCardProps) {
   return (
-    <div className="w-full md:w-[260px] border border-[#F2F2F7] p-4 rounded-sm cursor-pointer">
+    <div className="w-full dark:bg-primaryDark md:w-[260px] border border-[#F2F2F7] dark:border-deepestBg p-4 rounded-sm cursor-pointer">
       <div className="flex items-center gap-1">
-        <p className="text-[#64748B]">{props.prop.title}</p>
+        <p className="text-[#64748B] dark:text-white">{props.prop.title}</p>
         <InfoIcon />
       </div>
       <div className="flex items-center gap-1">
-        <h2 className="font-semibold text-[#334155] text-xl">
+        <h2 className="font-semibold text-[#334155] dark:text-white text-xl">
           {props.prop.title === "Total Revenue" ? "$" : ""}
           {props.prop.value.toLocaleString()}
         </h2>

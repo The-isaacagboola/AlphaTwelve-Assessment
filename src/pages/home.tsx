@@ -3,6 +3,7 @@ import SummaryCard from "../components/summary-card";
 import Carousel from "../components/Carousel";
 import EventHistory from "../components/event-history";
 import { useEffect, useState } from "react";
+import { useDarkMode } from "../context";
 
 const eventSummary = [
   {
@@ -70,6 +71,7 @@ const options = {
 
 const HomePage = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const { isDarkMode } = useDarkMode();
 
   useEffect(() => {
     const handleResize = () => {
@@ -83,11 +85,10 @@ const HomePage = () => {
     };
   }, []);
 
-  console.log(screenWidth);
   return (
-    <main className="lg:mr-6">
+    <main className="lg:mr-6 dark:text-white">
       <div className="mx-5 lg:mx-0">
-        <h1 className="text-[17px] md:text-[22px]">
+        <h1 className="text-[17px] md:text-[22px] mt-2">
           Welcome! here’s your summary
         </h1>
         {/* Summary Cards */}
@@ -103,11 +104,21 @@ const HomePage = () => {
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-[.55fr_.45fr]  gap-3 ">
-            <div className="flex items-center border border-[#F2F2F7] rounded-md justify-center overflow-hidden">
+            <div className="flex items-center border border-[#F2F2F7] dark:border-primaryDark dark:bg-primaryDark rounded-md justify-center overflow-hidden">
               <Chart
                 chartType="ColumnChart"
                 data={screenWidth > 768 ? DesktopChartData : MobileChartData}
-                options={options}
+                options={{
+                  ...options,
+                  backgroundColor: isDarkMode ? "#484554" : "#FFF",
+                  vAxis: {
+                    textStyle: { color: isDarkMode ? "#FFF" : "#64748B" },
+                  },
+                  hAxis: {
+                    textStyle: { color: isDarkMode ? "#FFF" : "#64748B" },
+                  },
+                  colors: ["#8576FF"],
+                }}
                 width={screenWidth > 768 ? "570px" : "500px"}
                 height={screenWidth > 768 ? "240px" : "260px"}
               />
@@ -123,3 +134,4 @@ const HomePage = () => {
   );
 };
 export default HomePage;
+// 383544

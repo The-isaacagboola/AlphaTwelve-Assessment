@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import ChevronLeftIcon from "../assets/icons/chevron-left";
 import ChevronRightIcon from "../assets/icons/chevron-right";
 import ChevronRightIcon2 from "../assets/icons/chevron-right2";
+import { useDarkMode } from "../context";
 
 const EventHistory = () => {
   const [paginationIndex, setPaginationIndex] = useState(0);
@@ -17,6 +18,8 @@ const EventHistory = () => {
   );
   const [openCell, setOpenCell] = useState<number | null>(null);
 
+  const { isDarkMode } = useDarkMode();
+
   return (
     <section className="mt-7 mb-[25px] lg:mb-[64px]">
       <div className="mx-5 lg:mx-0">
@@ -24,52 +27,56 @@ const EventHistory = () => {
 
         <div className="block md:flex items-center justify-between text-[#334155]">
           <div className="space-y-2 md:space-y-0 md:flex gap-2 items-center">
-            <div className="p-2 flex gap-2 items-center border border-[#E2E8F0] rounded-sm cursor-pointer">
+            <div className="p-2 flex gap-2 items-center border border-[#E2E8F0] rounded-sm cursor-pointer dark:bg-primaryDark">
               <SearchIcon />
               <input
                 type="text"
                 placeholder="Search..."
-                className="placeholder:text-[#CBD5E1] w-[156px] border-none outline-none"
+                className="placeholder:text-[#CBD5E1] w-[156px] border-none bg-transparent outline-none dark:text-[#FCF7FF]"
               />
             </div>
 
-            <div className="py-2 px-4 flex gap-2  justify-center border border-[#E2E8F0] rounded-sm cursor-pointer">
+            <div className="py-2 px-4 flex gap-2 dark:text-[#FCF7FF] justify-center border border-[#E2E8F0] rounded-sm cursor-pointer dark:bg-primaryDark">
               <p>Date</p>
-              <ChevronDown />
+              <ChevronDown outlineColor={isDarkMode ? "#FCF7FF" : "#334155"} />
             </div>
 
-            <div className="py-2 px-4 flex gap-2 items-center justify-center border border-[#E2E8F0] rounded-sm cursor-pointer">
+            <div className="py-2 px-4 flex gap-2 dark:text-[#FCF7FF] items-center justify-center border border-[#E2E8F0] rounded-sm cursor-pointer dark:bg-primaryDark">
               <p>Status</p>
-              <ChevronDown />
+              <ChevronDown outlineColor={isDarkMode ? "#FCF7FF" : "#334155"} />
             </div>
 
-            <div className="py-2 px-4 flex gap-2 items-center justify-center border border-[#E2E8F0] rounded-sm cursor-pointer">
+            <div className="py-2 px-4 flex gap-2 dark:text-[#FCF7FF] items-center justify-center border border-[#E2E8F0] rounded-sm cursor-pointer dark:bg-primaryDark">
               <p>Name</p>
-              <ChevronDown />
+              <ChevronDown outlineColor={isDarkMode ? "#FCF7FF" : "#334155"} />
             </div>
 
-            <h3 className="font-semibold pb-[10px] lg:mr-[80px] md:pb-0">
+            <h3 className="font-semibold pb-[10px] dark:text-[#FCF7FF] lg:mr-[80px] md:pb-0">
               Displaying {EventHistoryData.length} results
             </h3>
           </div>
 
-          <div className="space-y-2 md:space-y-0 md:flex gap-2 items-center">
-            <div className="flex justify-between">
-              <p>Sort:</p>
+          <div className="space-y-2 md:space-y-0 dark:text-[#FCF7FF] md:flex gap-2 items-center">
+            <div className="flex items-center justify-between">
+              <p className="lg:mr-2">Sort:</p>
 
-              <div className="py-2 px-4 flex gap-2 items-center border border-[#E2E8F0] rounded-sm cursor-pointer">
+              <div className="py-2 px-4 flex gap-2 items-center border border-[#E2E8F0] rounded-sm cursor-pointer dark:bg-primaryDark">
                 <p>Most Recent</p>
-                <ChevronDown />
+                <ChevronDown
+                  outlineColor={isDarkMode ? "#FCF7FF" : "#334155"}
+                />
               </div>
             </div>
 
             <div className="flex justify-between">
-              <div className="p-2 border border-[#E2E8F0] rounded-sm cursor-pointer">
-                <ThreeDots />
+              <div className="p-2 border border-[#E2E8F0] rounded-sm cursor-pointer dark:bg-primaryDark lg:mr-2">
+                <ThreeDots outlineColor={isDarkMode ? "#FCF7FF" : "#334155"} />
               </div>
 
-              <div className="py-2 px-4 flex gap-2 items-center border border-[#E2E8F0] rounded-sm cursor-pointer">
-                <DownloadIcon />
+              <div className="py-2 px-4 flex gap-2 items-center border border-[#E2E8F0] rounded-sm cursor-pointer dark:bg-primaryDark">
+                <DownloadIcon
+                  outlineColor={isDarkMode ? "#FCF7FF" : "#334155"}
+                />
                 <p>Export</p>
               </div>
             </div>
@@ -79,7 +86,7 @@ const EventHistory = () => {
 
       {/* Events Table --- Desktop  */}
       <table className="w-full text-left my-4">
-        <thead className="bg-[#F1F5F9] text-xs text-[#64748B]">
+        <thead className="bg-[#F1F5F9] dark:bg-[#6A6676] dark:text-white text-xs text-[#64748B]">
           <tr>
             <th className="p-4">Event Name</th>
             <th className="hidden lg:table-cell p-4">Date</th>
@@ -93,14 +100,16 @@ const EventHistory = () => {
             selectedData.map((event, i) => (
               <tr
                 key={i}
-                className={`cursor-pointer hover:bg-[#F5F5F5] relative ${
-                  openCell === i ? "bg-[#F5F5F5] pb-14 z-[10]" : "z-[2]"
+                className={`cursor-pointer hover:bg-[#F5F5F5] dark:hover:bg-primaryDark relative text-[15px] ${
+                  openCell === i
+                    ? "bg-[#F5F5F5] dark:bg-primaryDark pb-14 z-[10]"
+                    : "z-[2]"
                 }`}
                 onClick={() =>
                   openCell !== i ? setOpenCell(i) : setOpenCell(null)
                 }
               >
-                <td className="px-4 py-[16px] flex lg:table-cell">
+                <td className="px-4 py-[16px] w-[215px] truncate flex lg:table-cell">
                   <div
                     className={`lg:hidden transition-all ${
                       openCell === i && "rotate-90"
@@ -120,8 +129,8 @@ const EventHistory = () => {
                   <div
                     className={`flex items-center justify-center px-2 py-1 rounded-[100px] max-w-[100px] text-nowrap ${
                       event.completed
-                        ? "bg-[#10B981] lg:bg-[#D1FAE5]"
-                        : "bg-[#3B82F6] lg:bg-[#DBEAFE]"
+                        ? "bg-[#10B981] lg:bg-[#D1FAE5] dark:lg:bg-transparent dark:lg:border dark:lg:border-[#65DDB5]"
+                        : "bg-[#3B82F6] lg:bg-[#DBEAFE] dark:lg:bg-transparent dark:lg:border dark:lg:border-[#77B1FF]"
                     }`}
                   >
                     <span
@@ -142,9 +151,9 @@ const EventHistory = () => {
                 </td>
 
                 <div
-                  className={`${
+                  className={`lg:hidden left-0 top-[57px] absolute justify-between p-4  w-full h-[60px] z-[1000] bg-[#F5F5F5] dark:bg-primaryDark ${
                     openCell === i ? "flex mb-[57px]" : "hidden"
-                  } left-0 top-[57px] absolute justify-between p-4 w-full z-[1000] bg-[#F5F5F5]`}
+                  }`}
                   onClick={(e) => e.stopPropagation()}
                 >
                   <p>{event.speaker}</p>
@@ -163,7 +172,7 @@ const EventHistory = () => {
       </table>
 
       {/* PAGINATION */}
-      <div className="flex w-full justify-between">
+      <div className="flex w-full justify-between text-sm px-5 md:px-0">
         <div className="flex items-center gap-4">
           <button
             className="p-2 rounded-sm border border-[#E2E8F0] disabled:bg-slate-200"
@@ -173,7 +182,9 @@ const EventHistory = () => {
             }}
             disabled={paginationIndex == 0}
           >
-            <ChevronLeftIcon />
+            <ChevronLeftIcon
+              outlineColor={isDarkMode ? "#8576FF" : "#64748B"}
+            />
           </button>
 
           {[...Array(3)].map((_, i) => (
@@ -196,21 +207,21 @@ const EventHistory = () => {
             onClick={() => setPaginationIndex((index) => index + 1)}
             disabled={paginationIndex > 10}
           >
-            <ChevronRightIcon />
+            <ChevronRightIcon
+              outlineColor={isDarkMode ? "#8576FF" : "#64748B"}
+            />
           </button>
         </div>
 
         <div className="flex gap-2 items-center">
-          <p>Show:</p>
+          <p className="hidden lg:block">Show:</p>
 
-          <div className="py-2 px-4 flex gap-2 items-center border border-[#E2E8F0] rounded-sm cursor-pointer">
+          <div className="py-2 px-2 lg:px-4 text-nowrap flex gap-2 items-center border border-[#E2E8F0] rounded-sm cursor-pointer">
             <p>{Math.ceil(EventHistoryData.length / 10)} Rows</p>
             <ChevronDown />
           </div>
         </div>
       </div>
-
-      {/* EVENTS */}
     </section>
   );
 };
