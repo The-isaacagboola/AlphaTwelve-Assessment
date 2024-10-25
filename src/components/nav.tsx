@@ -8,7 +8,7 @@ import SettingsIcon from "../assets/icons/settingsIcon";
 import SpeakerIcon from "../assets/icons/speakerIcon";
 import DoubleLeftArrow from "../assets/icons/double-left-arrow";
 import avatar from "../assets/images/avatar_temika.webp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Hamburger from "../assets/icons/hamburger";
 import CloseIcon from "../assets/icons/close-icon";
 
@@ -56,6 +56,13 @@ export const Nav = () => {
 
   const closeMobileNav = () => setShowMobileNav(false);
 
+  useEffect(() => {
+    if (showMobileNav) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showMobileNav]);
   return (
     <nav
       className={`p-2 lg:border-r lg:border-r-[#F1F5F9] transition-all duration-700 ease-in-out ${
@@ -77,19 +84,58 @@ export const Nav = () => {
             onClick={() => setShowMobileNav((prev) => !prev)}
           >
             {showMobileNav ? (
-              <Hamburger />
-            ) : (
               <div className="p-[6px] rounded-full border border-[#E2E8F0]">
                 <CloseIcon />
               </div>
+            ) : (
+              <Hamburger />
             )}
           </button>
         </div>
 
+        {/* Mobile navigation */}
         <div
-          className={`text-[#334155] text-[14px] bg-white z-50 absolute  opacity-0 md:opacity-100 md:flex md:relative flex-col gap-2 transition-all duration-500  ${
-            showMobileNav ? "block translate-y-0 opacity-100" : "hidden"
+          className={`text-[#334155] text-[14px] bg-white fixed top-0 left-0 w-full h-full transition-all duration-700 ease-in-out transform ${
+            showMobileNav
+              ? "translate-y-0 opacity-100 z-50"
+              : "-translate-y-full opacity-0 z-1000"
           }`}
+        >
+          <div className="p-4 flex justify-between">
+            <h1
+              className={`text-[#2563EB] border border-[#2563EB] bg-[#93C5FD] border-dashed px-[6px] py-2 text-xs font-semibold cursor-pointer`}
+            >
+              {!collapsed && "Full Logo"}
+            </h1>
+
+            <button onClick={closeMobileNav}>
+              <div className="p-[6px] rounded-full border border-[#E2E8F0]">
+                <CloseIcon />
+              </div>
+            </button>
+          </div>
+          <div className="flex flex-col gap-4 p-5">
+            {routes.map((route, i) => (
+              <Link
+                key={i}
+                to={route.path}
+                onClick={() => {
+                  setPresentRoute(route.path);
+                  closeMobileNav();
+                }}
+              >
+                <div className="flex items-center gap-2 p-2">
+                  <route.icon outlineColor={"#ADA9BB"} width={30} height={30} />
+                  <p>{route.name}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop */}
+        <div
+          className={`hidden text-[#334155] text-[14px] bg-white  md:flex md:relative flex-col gap-2 transition-all duration-500`}
         >
           {routes.map((route, i) => (
             <Link

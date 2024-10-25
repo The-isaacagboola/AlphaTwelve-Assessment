@@ -40,15 +40,21 @@ export default function Carousel() {
     return data[active];
   }, [active]);
   return (
-    <div className="relative rounded-[5px] overflow-clip">
-      {data.map((item, i) => (
-        <div
-          key={i}
-          className={`${i === active ? "block transition-all" : "hidden"}`}
-        >
-          <img src={item.image} alt="carousel image" />
-        </div>
-      ))}
+    <div className="relative rounded-[5px] overflow-clip max-w-max">
+      <div className="relative">
+        {data.map((item, i) => (
+          <div
+            key={i}
+            className={`${i === active ? "block transition-all" : "hidden"}`}
+          >
+            <img
+              src={item.image}
+              alt="carousel image"
+              className="object-cover w-full h-[320px]  md:h-auto"
+            />
+          </div>
+        ))}
+      </div>
 
       <div className="flex perfect-center p-4 justify-between items-center w-full absolute">
         <button
@@ -66,7 +72,7 @@ export default function Carousel() {
         </button>
       </div>
 
-      <div className="bg-gradient-custom px-4 pt-4 pb-[27px] text-xs bottom-0 text-white justify-between items-center w-full absolute">
+      <div className="bg-gradient-custom px-4 pt-4 pb-[14px] md:pb-[27px] text-xs bottom-0 text-white justify-between items-center w-full absolute">
         <p className="font-semibold mb-2">{ActivePostData.title}</p>
         <p>{ActivePostData.description}</p>
 
