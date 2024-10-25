@@ -25,3 +25,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.transition-opacity {
+  transition: 0.5s ease-in-out; /* Adjust duration and timing function as needed */
+}

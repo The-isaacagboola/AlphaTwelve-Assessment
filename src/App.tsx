@@ -8,6 +8,7 @@ import NotificationsPage from "./pages/notifications";
 import MessagesPage from "./pages/Messages";
 import { Nav } from "./components/nav";
 import SettingsPage from "./pages/settings";
+import { MobileNavFooter } from "./components/MobileNavFooter";
 
 const routes = [
   { path: "/", element: <HomePage /> },
@@ -33,6 +34,7 @@ function App() {
               />
             ))}
           </Routes>
+          <MobileNavFooter />
         </section>
       </div>
     </BrowserRouter>

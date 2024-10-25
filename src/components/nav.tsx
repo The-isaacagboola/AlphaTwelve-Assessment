@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import Hamburger from "../assets/icons/hamburger";
 import CloseIcon from "../assets/icons/close-icon";
 
-const routes = [
+export const routes = [
   {
     name: "Home",
     path: "/",

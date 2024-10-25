@@ -85,43 +85,40 @@ const HomePage = () => {
 
   console.log(screenWidth);
   return (
-    <main className="mx-5 lg:mx-0 lg:mr-6">
-      <h1 className="text-[17px] md:text-[22px]">
-        Welcome! here’s your summary
-      </h1>
-      {/* Summary Cards */}
-      <div className="mt-6 flex flex-col gap-3 lg:flex-row lg:flex-wrap w-full ">
-        {eventSummary.map((item, i) => (
-          <SummaryCard key={i} prop={item} />
-        ))}
-      </div>
-      {/* Graph and Carousel */}
-      <div className="mt-[21px] md:mt-[34px]">
-        <h2 className="font-medium text-lg mb-3">
-          Event Registrations per month
-        </h2>
+    <main className="lg:mr-6">
+      <div className="mx-5 lg:mx-0">
+        <h1 className="text-[17px] md:text-[22px]">
+          Welcome! here’s your summary
+        </h1>
+        {/* Summary Cards */}
+        <div className="mt-6 flex flex-col gap-3 lg:flex-row lg:flex-wrap w-full ">
+          {eventSummary.map((item, i) => (
+            <SummaryCard key={i} prop={item} />
+          ))}
+        </div>
+        {/* Graph and Carousel */}
+        <div className="mt-[21px] md:mt-[34px]">
+          <h2 className="font-medium text-lg mb-3">
+            Event Registrations per month
+          </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[.55fr_.45fr]  gap-3 ">
-          <div className="flex items-center border border-[#F2F2F7] rounded-md justify-center overflow-hidden">
-            <Chart
-              chartType="ColumnChart"
-              data={screenWidth > 768 ? DesktopChartData : MobileChartData}
-              options={options}
-              width={screenWidth > 768 ? "570px" : "500px"}
-              height={screenWidth > 768 ? "240px" : "260px"}
-            />
+          <div className="grid grid-cols-1 lg:grid-cols-[.55fr_.45fr]  gap-3 ">
+            <div className="flex items-center border border-[#F2F2F7] rounded-md justify-center overflow-hidden">
+              <Chart
+                chartType="ColumnChart"
+                data={screenWidth > 768 ? DesktopChartData : MobileChartData}
+                options={options}
+                width={screenWidth > 768 ? "570px" : "500px"}
+                height={screenWidth > 768 ? "240px" : "260px"}
+              />
+            </div>
+            <Carousel />
           </div>
-          <Carousel />
         </div>
       </div>
 
-      {/* Desktop Event Table */}
-      <div className="hidden lg:block">
-        <EventHistory />
-      </div>
-
-      {/* Mobile Event Table -- Grid */}
-      <div className="lg:hidden"></div>
+      {/* Desktop and Mobile Event Table */}
+      <EventHistory />
     </main>
   );
 };

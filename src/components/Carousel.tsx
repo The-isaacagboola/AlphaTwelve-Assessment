@@ -45,12 +45,16 @@ export default function Carousel() {
         {data.map((item, i) => (
           <div
             key={i}
-            className={`${i === active ? "block transition-all" : "hidden"}`}
+            className={`${
+              i === active
+                ? "block transition-opacity opacity-100"
+                : "w-0 h-0 opacity-70"
+            }`}
           >
             <img
               src={item.image}
               alt="carousel image"
-              className="object-cover w-full h-[320px]  md:h-auto"
+              className="object-cover w-full md:w-auto h-[320px] md:h-auto"
             />
           </div>
         ))}
