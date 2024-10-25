@@ -9,6 +9,8 @@ import SpeakerIcon from "../assets/icons/speakerIcon";
 import DoubleLeftArrow from "../assets/icons/double-left-arrow";
 import avatar from "../assets/images/avatar_temika.webp";
 import { useState } from "react";
+import Hamburger from "../assets/icons/hamburger";
+import CloseIcon from "../assets/icons/close-icon";
 
 const routes = [
   {
@@ -50,15 +52,18 @@ const routes = [
 export const Nav = () => {
   const [presentRoute, setPresentRoute] = useState("/");
   const [collapsed, setCollapsed] = useState(false);
+  const [showMobileNav, setShowMobileNav] = useState(false);
+
+  const closeMobileNav = () => setShowMobileNav(false);
 
   return (
     <nav
-      className={`p-2 lg:${
-        collapsed ? "w-[64px]" : "w-[240px]"
-      } lg:border-r lg:border-r-[#F1F5F9] transition-all duration-500`}
+      className={`p-2 lg:border-r lg:border-r-[#F1F5F9] transition-all duration-700 ease-in-out ${
+        collapsed ? "lg:w-[64px]" : "lg:w-[240px]"
+      }`}
     >
-      <div>
-        <div className={` p-2 max-w-max mb-4`}>
+      <div className="w-full relative">
+        <div className="flex justify-between items-center w-full p-2 lg:max-w-max mb-4">
           <h1
             className={`${
               collapsed ? "w-8 h-8" : ""
@@ -66,9 +71,26 @@ export const Nav = () => {
           >
             {!collapsed && "Full Logo"}
           </h1>
+
+          <button
+            className="md:hidden"
+            onClick={() => setShowMobileNav((prev) => !prev)}
+          >
+            {showMobileNav ? (
+              <Hamburger />
+            ) : (
+              <div className="p-[6px] rounded-full border border-[#E2E8F0]">
+                <CloseIcon />
+              </div>
+            )}
+          </button>
         </div>
 
-        <div className="text-[#334155] text-[14px] flex flex-col gap-2">
+        <div
+          className={`text-[#334155] text-[14px] bg-white z-50 absolute  opacity-0 md:opacity-100 md:flex md:relative flex-col gap-2 transition-all duration-500  ${
+            showMobileNav ? "block translate-y-0 opacity-100" : "hidden"
+          }`}
+        >
           {routes.map((route, i) => (
             <Link
               key={i}
