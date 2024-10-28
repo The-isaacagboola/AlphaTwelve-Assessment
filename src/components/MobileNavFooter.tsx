@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import { routes } from "./nav";
 import { useDarkMode } from "../context";
 import UserCircle from "../assets/icons/user-circle";
+import { useState } from "react";
 
 export const MobileNavFooter = () => {
-  const currentPath = window.location.pathname;
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
   const { isDarkMode } = useDarkMode();
 
@@ -15,13 +16,22 @@ export const MobileNavFooter = () => {
           <Link
             to={item.path}
             key={i}
-            className="h-[64px] flex flex-col gap-2 pt-2 items-center justify-center"
+            className={`h-[64px] flex flex-col gap-2 pt-2 items-center justify-center px-1 ${
+              item.path === currentPath ? "border-t-4 border-t-[#8576FF]" : " "
+            }`}
+            onClick={() => setCurrentPath(item.path)}
           >
             {
               <item.icon
                 width={24}
                 height={24}
-                outlineColor={isDarkMode ? "#FFF" : "#484554"}
+                outlineColor={
+                  item.path === currentPath
+                    ? "#8576FF"
+                    : isDarkMode
+                    ? "#8576FF"
+                    : "#484554"
+                }
               />
             }
             <p

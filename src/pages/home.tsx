@@ -92,7 +92,7 @@ const HomePage = () => {
           Welcome! here’s your summary
         </h1>
         {/* Summary Cards */}
-        <div className="mt-6 flex flex-col gap-3 lg:flex-row lg:flex-wrap w-full ">
+        <div className="mt-6 flex flex-col gap-3 md:flex-row md:flex-wrap w-full ">
           {eventSummary.map((item, i) => (
             <SummaryCard key={i} prop={item} />
           ))}
@@ -103,8 +103,8 @@ const HomePage = () => {
             Event Registrations per month
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[.55fr_.45fr]  gap-3 ">
-            <div className="flex items-center border border-[#F2F2F7] dark:border-primaryDark dark:bg-primaryDark rounded-md justify-center overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-[.55fr_.45fr] content-center gap-3 ">
+            <div className="flex border border-[#F2F2F7] dark:border-primaryDark dark:bg-primaryDark rounded-md justify-center  overflow-x-scroll">
               <Chart
                 chartType="ColumnChart"
                 data={screenWidth > 768 ? DesktopChartData : MobileChartData}

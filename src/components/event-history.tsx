@@ -109,7 +109,7 @@ const EventHistory = () => {
                   openCell !== i ? setOpenCell(i) : setOpenCell(null)
                 }
               >
-                <td className="px-4 py-[16px] w-[215px] truncate flex lg:table-cell">
+                <td className="px-4 py-[16px] w-[215px] text-nowrap text-ellipsis flex lg:table-cell">
                   <div
                     className={`lg:hidden transition-all ${
                       openCell === i && "rotate-90"
@@ -119,10 +119,10 @@ const EventHistory = () => {
                   </div>
                   {event.name}
                 </td>
-                <td className="hidden lg:table-cell px-4 py-[16px]">
+                <td className="hidden md:table-cell px-4 py-[16px]">
                   {event.date}
                 </td>
-                <td className=" hidden lg:table-cell px-4 py-[16px]">
+                <td className=" hidden md:table-cell px-4 py-[16px]">
                   {event.speaker}
                 </td>
                 <td className="px-4 py-[16px]">
@@ -151,7 +151,7 @@ const EventHistory = () => {
                 </td>
 
                 <div
-                  className={`lg:hidden left-0 top-[57px] absolute justify-between p-4  w-full h-[60px] z-[1000] bg-[#F5F5F5] dark:bg-primaryDark ${
+                  className={`md:hidden left-0 top-[60px] absolute justify-between p-4  w-full h-[60px] z-[1000] bg-[#F5F5F5] dark:bg-primaryDark ${
                     openCell === i ? "flex mb-[57px]" : "hidden"
                   }`}
                   onClick={(e) => e.stopPropagation()}
