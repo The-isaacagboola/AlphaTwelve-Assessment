@@ -89,8 +89,8 @@ const EventHistory = () => {
         <thead className="bg-[#F1F5F9] dark:bg-[#6A6676] dark:text-white text-xs text-[#64748B]">
           <tr>
             <th className="p-4">Event Name</th>
-            <th className="hidden lg:table-cell p-4">Date</th>
-            <th className="hidden lg:table-cell p-4">Speaker</th>
+            <th className="hidden md:table-cell p-4">Date</th>
+            <th className="hidden md:table-cell p-4">Speaker</th>
             <th className="p-4">Status</th>
           </tr>
         </thead>
@@ -157,7 +157,7 @@ const EventHistory = () => {
                   onClick={(e) => e.stopPropagation()}
                 >
                   <p>{event.speaker}</p>
-                  <p>{event.date}</p>
+                  <p className="mr-8">{event.date}</p>
                 </div>
               </tr>
             ))
